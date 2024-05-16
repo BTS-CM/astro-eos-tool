@@ -41,59 +41,66 @@ export default function WrapComponent() {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <HoverInfo
-          content="The account whose available RAM will be tokenized."
-          header="Account with available RAM to tokenize"
-        />
-        <Input
-          placeholder="username"
-          value={from}
-          type="text"
-          onInput={(e) => setFrom(e.currentTarget.value)}
-        />
-        <HoverInfo
-          content={`You can exchange your account's available RAM in return for tokenized RAM (WRAM). This WRAM can then be traded or sold on the market.`}
-          header={`Quantity of RAM bytes to convert to WRAM`}
-        />
-        <Input
-          placeholder="1"
-          value={bytes}
-          type="number"
-          onInput={(e) => setBytes(parseInt(e.currentTarget.value))}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setOpenDeeplink(true);
-            }
-          }}
-        />
-        <Button className="mt-3" onClick={() => setOpenDeeplink(true)}>
-          Submit
-        </Button>
-        {openDeeplink ? (
-          <DeepLinkDialog
-            trxJSON={[
-              {
-                account: "eosio",
-                name: "ramtransfer",
-                authorization: [
+        {chain !== "EOS" ? (
+          <p>This feature is currently only supported by the EOS blockchain.</p>
+        ) : null}
+        {chain === "EOS" ? (
+          <>
+            <HoverInfo
+              content="The account whose available RAM will be tokenized."
+              header="Account with available RAM to tokenize"
+            />
+            <Input
+              placeholder="username"
+              value={from}
+              type="text"
+              onInput={(e) => setFrom(e.currentTarget.value)}
+            />
+            <HoverInfo
+              content={`You can exchange your account's available RAM in return for tokenized RAM (WRAM). This WRAM can then be traded or sold on the market.`}
+              header={`Quantity of RAM bytes to convert to WRAM`}
+            />
+            <Input
+              placeholder="1"
+              value={bytes}
+              type="number"
+              onInput={(e) => setBytes(parseInt(e.currentTarget.value))}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setOpenDeeplink(true);
+                }
+              }}
+            />
+            <Button className="mt-3" onClick={() => setOpenDeeplink(true)}>
+              Submit
+            </Button>
+            {openDeeplink ? (
+              <DeepLinkDialog
+                trxJSON={[
                   {
-                    actor: from,
-                    permission: "active",
+                    account: "eosio",
+                    name: "ramtransfer",
+                    authorization: [
+                      {
+                        actor: from,
+                        permission: "active",
+                      },
+                    ],
+                    data: {
+                      from: from,
+                      to: "eosio.wram",
+                      bytes: bytes,
+                      memo: "",
+                    },
                   },
-                ],
-                data: {
-                  from: from,
-                  to: "eosio.wram",
-                  bytes: bytes,
-                  memo: "",
-                },
-              },
-            ]}
-            operationName="ramtransfer"
-            chain={chain}
-            dismissCallback={() => setOpenDeeplink(false)}
-            headerText={`Ready to wrap RAM via ramtransfer method!`}
-          />
+                ]}
+                operationName="ramtransfer"
+                chain={chain}
+                dismissCallback={() => setOpenDeeplink(false)}
+                headerText={`Ready to wrap RAM via ramtransfer method!`}
+              />
+            ) : null}
+          </>
         ) : null}
       </div>
     </div>

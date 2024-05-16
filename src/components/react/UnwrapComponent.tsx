@@ -41,59 +41,66 @@ export default function UnwrapComponent() {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <HoverInfo
-          content="This is the account which will perform the unwrap action. Converting WRAM back into usable RAM."
-          header="Account which will convert its WRAM back into usable RAM"
-        />
-        <Input
-          placeholder="username"
-          value={from}
-          type="text"
-          onInput={(e) => setFrom(e.currentTarget.value)}
-        />
-        <HoverInfo
-          content={`Quantity of WRAM in your account's balance which will be converted back to usable RAM.`}
-          header={`Quantity of WRAM to unwrap back to usable RAM`}
-        />
-        <Input
-          placeholder="1"
-          value={quantity}
-          type="number"
-          onInput={(e) => setQuantity(parseInt(e.currentTarget.value))}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setOpenDeeplink(true);
-            }
-          }}
-        />
-        <Button className="mt-3" onClick={() => setOpenDeeplink(true)}>
-          Submit
-        </Button>
-        {openDeeplink ? (
-          <DeepLinkDialog
-            trxJSON={[
-              {
-                account: "eosio.token",
-                name: "transfer",
-                authorization: [
+        {chain !== "EOS" ? (
+          <p>This feature is currently only supported by the EOS blockchain.</p>
+        ) : null}
+        {chain === "EOS" ? (
+          <>
+            <HoverInfo
+              content="This is the account which will perform the unwrap action. Converting WRAM back into usable RAM."
+              header="Account which will convert its WRAM back into usable RAM"
+            />
+            <Input
+              placeholder="username"
+              value={from}
+              type="text"
+              onInput={(e) => setFrom(e.currentTarget.value)}
+            />
+            <HoverInfo
+              content={`Quantity of WRAM in your account's balance which will be converted back to usable RAM.`}
+              header={`Quantity of WRAM to unwrap back to usable RAM`}
+            />
+            <Input
+              placeholder="1"
+              value={quantity}
+              type="number"
+              onInput={(e) => setQuantity(parseInt(e.currentTarget.value))}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setOpenDeeplink(true);
+                }
+              }}
+            />
+            <Button className="mt-3" onClick={() => setOpenDeeplink(true)}>
+              Submit
+            </Button>
+            {openDeeplink ? (
+              <DeepLinkDialog
+                trxJSON={[
                   {
-                    actor: from,
-                    permission: "active",
+                    account: "eosio.token",
+                    name: "transfer",
+                    authorization: [
+                      {
+                        actor: from,
+                        permission: "active",
+                      },
+                    ],
+                    data: {
+                      from: from,
+                      to: "eosio.wram",
+                      quantity: `${quantity} WRAM`,
+                      memo: "",
+                    },
                   },
-                ],
-                data: {
-                  from: from,
-                  to: "eosio.wram",
-                  quantity: `${quantity} WRAM`,
-                  memo: "",
-                },
-              },
-            ]}
-            operationName="transfer"
-            chain={chain}
-            dismissCallback={() => setOpenDeeplink(false)}
-            headerText={`Ready to unwrap WRAM via transfer method!`}
-          />
+                ]}
+                operationName="transfer"
+                chain={chain}
+                dismissCallback={() => setOpenDeeplink(false)}
+                headerText={`Ready to unwrap WRAM via transfer method!`}
+              />
+            ) : null}
+          </>
         ) : null}
       </div>
     </div>
