@@ -1,9 +1,20 @@
 import React, { useState, useEffect, useSyncExternalStore } from "react";
+import { QRCode } from "react-qrcode-logo";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import {
   Dialog,
@@ -55,6 +66,7 @@ export default function DeepLinkDialog({
     }
 
     if (operationName && trxJSON) {
+      console.log({ trxJSON });
       createDeepLink();
     }
   }, [operationName, trxJSON]);
@@ -68,6 +80,11 @@ export default function DeepLinkDialog({
       }, 10000);
     }
   };
+
+  const [qrECL, setQRECL] = useState<"M" | "L" | "Q" | "H" | undefined>("M");
+  const [qrSize, setQRSize] = useState<string>("250");
+  const [qrQZ, setQRQZ] = useState<string>("10");
+  const [qrStyle, setQRStyle] = useState<"dots" | "squares" | "fluid" | undefined>("dots");
 
   return (
     <Dialog
@@ -100,7 +117,7 @@ export default function DeepLinkDialog({
               >
                 <TabsList
                   key={`${activeTab ? activeTab : "loading"}_TabList`}
-                  className="grid w-full grid-cols-3 gap-2"
+                  className="grid w-full grid-cols-4 gap-2"
                 >
                   <TabsTrigger key="TRXTab" value="object" onClick={() => setActiveTab("object")}>
                     View TRX Object
@@ -111,6 +128,13 @@ export default function DeepLinkDialog({
                     onClick={() => setActiveTab("deeplink")}
                   >
                     Raw Deeplink
+                  </TabsTrigger>
+                  <TabsTrigger
+                    key="QRCodeTab"
+                    value="qrcode"
+                    onClick={() => setActiveTab("qrcode")}
+                  >
+                    QR Code
                   </TabsTrigger>
                   <TabsTrigger
                     key="JSONTab"
@@ -170,6 +194,102 @@ export default function DeepLinkDialog({
                       <Button className="mt-4 ml-3">BeetEOS</Button>
                     </a>
                   ) : null}
+                </TabsContent>
+                <TabsContent value="qrcode">
+                  <Label className="text-left">QR code for BeetEOS broadcast</Label>
+                  <ol className="ml-4">
+                    <li>
+                      Launch the BeetEOS wallet and navigate to 'QR Code' in the menu, the wallet
+                      has to remain unlocked for the duration of the broadcast.
+                    </li>
+                    <li>
+                      From this page you can either allow all operations, or solely allow operation
+                      '{operationName}' (then click save).
+                    </li>
+                    <li>
+                      Once 'Ready for QR codes' shows in Beet, then you can click the button below
+                      to proceed.
+                    </li>
+                    <li>
+                      A prompt will display, verify the contents, optionally request a Beet receipt,
+                      and then broadcast the transaction onto the blockchain.
+                    </li>
+                    <li>
+                      You won't receive a confirmation in this window, but your operation will be
+                      processed within seconds on the blockchain.
+                    </li>
+                  </ol>
+
+                  <QRCode
+                    value={JSON.stringify({ actions: trxJSON })}
+                    ecLevel={qrECL}
+                    size={parseInt(qrSize, 10)}
+                    quietZone={parseInt(qrQZ, 10)}
+                    qrStyle={qrStyle}
+                    bgColor={"#FFFFFF"}
+                    fgColor={"#000000"}
+                  />
+
+                  <div className="grid sm:grid-cols-1 md:grid-cols-4 gap-1">
+                    <Select value={qrECL} onValueChange={(e: any) => setQRECL(e)}>
+                      <SelectTrigger>
+                        <SelectValue>ECL</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Error correction level</SelectLabel>
+                          <SelectItem value="L">L</SelectItem>
+                          <SelectItem value="M">M</SelectItem>
+                          <SelectItem value="Q">Q</SelectItem>
+                          <SelectItem value="H">H</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+
+                    <Select value={qrSize} onValueChange={setQRSize}>
+                      <SelectTrigger>
+                        <SelectValue>Size</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>QR code size</SelectLabel>
+                          <SelectItem value="150">150</SelectItem>
+                          <SelectItem value="250">250</SelectItem>
+                          <SelectItem value="300">300</SelectItem>
+                          <SelectItem value="350">350</SelectItem>
+                          <SelectItem value="385">385</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+
+                    <Select value={qrQZ} onValueChange={setQRQZ}>
+                      <SelectTrigger>
+                        <SelectValue>Padding</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Padding</SelectLabel>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="10">10</SelectItem>
+                          <SelectItem value="25">25</SelectItem>
+                          <SelectItem value="50">50</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+
+                    <Select value={qrStyle} onValueChange={(e: any) => setQRStyle(e)}>
+                      <SelectTrigger>
+                        <SelectValue>Dot style</SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Dot style</SelectLabel>
+                          <SelectItem value="dots">Dots</SelectItem>
+                          <SelectItem value="squares">Squares</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </TabsContent>
                 <TabsContent value="localJSON">
                   <Label className="text-left">Via local file upload - ready to proceed</Label>
