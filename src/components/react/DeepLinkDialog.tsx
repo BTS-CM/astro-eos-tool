@@ -93,6 +93,9 @@ export default function DeepLinkDialog({
   const [qrQZ, setQRQZ] = useState<string>("10");
   const [qrStyle, setQRStyle] = useState<"dots" | "squares" | "fluid" | undefined>("dots");
 
+  const [qrAccordionOpen, setQRAccordionOpen] = useState<string>("qr");
+  const [showQRCode, setShowQRCode] = useState<boolean>(false);
+
   return (
     <Dialog
       open={true}
@@ -187,11 +190,22 @@ export default function DeepLinkDialog({
           ) : null}
           {activeTab && activeTab === "qrcode" ? (
             <>
-              <Accordion type="single" collapsible className="w-full" defaultValue="qr">
+              <Accordion
+                type="single"
+                collapsible
+                className="w-full"
+                defaultValue={qrAccordionOpen}
+                value={qrAccordionOpen}
+              >
                 <AccordionItem value="qr">
-                  <AccordionTrigger>Via QR code - ready to proceed</AccordionTrigger>
-                  <AccordionContent>
-                    <ol>
+                  <AccordionTrigger
+                    className="pb-1 pt-1"
+                    onClick={() => setQRAccordionOpen(qrAccordionOpen === "qr" ? "" : "qr")}
+                  >
+                    Via QR code - ready to proceed
+                  </AccordionTrigger>
+                  <AccordionContent className="mt-0 pt-0 mb-1 pb-0">
+                    <ul className="ml-2 list-disc [&>li]:mt-2">
                       <li>
                         Launch the BeetEOS wallet and navigate to 'QR Code' in the menu, the wallet
                         has to remain unlocked for the duration of the broadcast.
@@ -212,26 +226,19 @@ export default function DeepLinkDialog({
                         You won't receive a confirmation in this window, but your operation will be
                         processed within seconds on the blockchain.
                       </li>
-                    </ol>
+                    </ul>
+                    <Button className="h-5 mt-1 mb-1" onClick={() => setQRAccordionOpen("")}>
+                      Hide info
+                    </Button>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
 
               <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
-                <QRCode
-                  value={JSON.stringify({ actions: trxJSON })}
-                  ecLevel={qrECL}
-                  size={parseInt(qrSize, 10)}
-                  quietZone={parseInt(qrQZ, 10)}
-                  qrStyle={qrStyle}
-                  bgColor={"#FFFFFF"}
-                  fgColor={"#000000"}
-                />
-
                 <div className="grid grid-cols-1 gap-1">
                   <Select value={qrECL} onValueChange={(e: any) => setQRECL(e)}>
                     <SelectTrigger>
-                      <SelectValue>ECL</SelectValue>
+                      <SelectValue>Error correction level: {qrECL}</SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
@@ -246,7 +253,7 @@ export default function DeepLinkDialog({
 
                   <Select value={qrSize} onValueChange={setQRSize}>
                     <SelectTrigger>
-                      <SelectValue>Size</SelectValue>
+                      <SelectValue>Size: {qrSize}</SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
@@ -262,7 +269,7 @@ export default function DeepLinkDialog({
 
                   <Select value={qrQZ} onValueChange={setQRQZ}>
                     <SelectTrigger>
-                      <SelectValue>Padding</SelectValue>
+                      <SelectValue>Padding: {qrQZ}</SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
@@ -277,7 +284,7 @@ export default function DeepLinkDialog({
 
                   <Select value={qrStyle} onValueChange={(e: any) => setQRStyle(e)}>
                     <SelectTrigger>
-                      <SelectValue>Dot style</SelectValue>
+                      <SelectValue>Dot style: {qrStyle}</SelectValue>
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
@@ -287,6 +294,36 @@ export default function DeepLinkDialog({
                       </SelectGroup>
                     </SelectContent>
                   </Select>
+
+                  <Button onClick={() => setShowQRCode(true)}>Show QR code</Button>
+
+                  <Dialog
+                    open={showQRCode}
+                    onOpenChange={(open) => {
+                      setShowQRCode(open);
+                    }}
+                  >
+                    <DialogContent className="sm:max-w-[800px] bg-white">
+                      <DialogHeader>
+                        <DialogTitle>QR code</DialogTitle>
+                        <DialogDescription>
+                          Scan this code within the BeetEOS wallet to broadcast the operation.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div>
+                        <QRCode
+                          value={JSON.stringify({ actions: trxJSON })}
+                          ecLevel={qrECL}
+                          size={parseInt(qrSize, 10)}
+                          quietZone={parseInt(qrQZ, 10)}
+                          qrStyle={qrStyle}
+                          bgColor={"#FFFFFF"}
+                          fgColor={"#000000"}
+                        />
+                      </div>
+                      <Button onClick={() => setShowQRCode(false)}>Back</Button>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </>
