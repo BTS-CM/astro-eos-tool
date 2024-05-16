@@ -1,0 +1,192 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import Header from "@/components/astro/header.astro";
+import Footer from "@/components/astro/footer.astro";
+
+import { 
+	ArrowUpIcon, QuestionMarkCircledIcon, DoubleArrowUpIcon, ThickArrowUpIcon, PaperPlaneIcon, LockOpen2Icon, LockClosedIcon, ThickArrowDownIcon
+} from "@radix-ui/react-icons";
+
+---
+
+<Layout title="EOS Astro Tool index page">
+	<main>
+		<Header />
+		<div class="grid grid-cols-1 gap-3 md:grid-cols-2 mt-5">
+			<div class="col-span-1">
+				<a href="/buyrambytes">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<ArrowUpIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Buy RAM Bytes
+								</span>
+							</span>
+							</CardTitle>
+						  <CardDescription>Purchase an exact amount of RAM in bytes</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/buyram">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<DoubleArrowUpIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Buy RAM with EOS
+								</span>
+							</span>
+							</CardTitle>
+						  <CardDescription>Sell EOS in return for RAM</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/stake">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<ThickArrowUpIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Stake CPU/NET
+								</span>
+							</span>
+						  </CardTitle>
+						  <CardDescription>Stake EOS in return for CPU and/or NET resources</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/stake">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<ThickArrowDownIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Unstake CPU/NET
+								</span>
+							</span>
+						  </CardTitle>
+						  <CardDescription>Unstake CPU/NET resources back into EOS</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/wrap">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<LockClosedIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Wrap RAM
+								</span>
+							</span>
+						  </CardTitle>
+						  <CardDescription>Wrap usable RAM into WRAM for transfer purposes</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/unwrap">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<LockOpen2Icon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Unwrap WRAM
+								</span>
+							</span>
+						  </CardTitle>
+						  <CardDescription>Unwrap WRAM back into usable RAM</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/transfer">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<PaperPlaneIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Transfer
+								</span>
+							</span>
+						  </CardTitle>
+						  <CardDescription>Transfer a quantity of an asset to another account</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/about">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<QuestionMarkCircledIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									About
+								</span>
+							</span>
+						</CardTitle>
+						  <CardDescription>Do you want to know more?</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+		</div>
+		
+		<Footer />
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 900px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+		min-height: 100vh;
+	}
+</style>

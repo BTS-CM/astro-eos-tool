@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import Header from "@/components/astro/header.astro";
+import Footer from "@/components/astro/footer.astro";
+
+import BuyRam from "@/components/react/BuyRam.tsx";
+---
+
+<Layout title="EOS Astro Tool - Buying RAM with EOS">
+	<main>
+		<Header />
+		<div class="grid grid-cols-1 mt-5">
+			<div class="col-span-1">
+				<Card>
+					<CardHeader>
+						<CardTitle>Buy Ram with EOS</CardTitle>
+						<CardDescription>This action will try to buy as much RAM as possible with the EOS you sell.</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<BuyRam client:only="react" />
+					</CardContent>
+				</Card>
+			</div>
+		</div>
+		<Footer />
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 600px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+		min-height: 100%;
+		height: 100%;
+	}
+</style>
