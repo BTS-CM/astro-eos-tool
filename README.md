@@ -1,6 +1,15 @@
-# EOS Astro NFT tool
+# EOS Astro tool
 
 Implemented using React, Astro and ShadCN.
+
+Supports the following actions:
+
+- buyram
+- buyrambytes
+- delegatebw
+- undelegatebw
+- ramtransfer (for wrapping RAM)
+- transfer
 
 ## Setup instructions
 
