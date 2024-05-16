@@ -1,4 +1,4 @@
-# Bitshares Astro NFT tool
+# EOS Astro NFT tool
 
 Implemented using React, Astro and ShadCN.
 
@@ -11,10 +11,6 @@ Repo currently uses [Bun](https://bun.sh/) for package management and building p
 For windows, use the [windows linux subsystem](https://learn.microsoft.com/en-us/windows/wsl/install) to create an ubuntu instance in your terminal to run the following commands:
 
 `bun install`
-
-`bun run fetchAssets`
-
-`bun run fetchIssuers`
 
 `bun run dev`
 
