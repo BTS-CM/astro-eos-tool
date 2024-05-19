@@ -11,7 +11,15 @@ import Header from "@/components/astro/header.astro";
 import Footer from "@/components/astro/footer.astro";
 
 import { 
-	ArrowUpIcon, QuestionMarkCircledIcon, DoubleArrowUpIcon, ThickArrowUpIcon, PaperPlaneIcon, LockOpen2Icon, LockClosedIcon, ThickArrowDownIcon
+	ArrowUpIcon,
+	QuestionMarkCircledIcon,
+	DoubleArrowUpIcon,
+	ThickArrowUpIcon,
+	PaperPlaneIcon,
+	LockOpen2Icon,
+	LockClosedIcon,
+	ThickArrowDownIcon,
+	UpdateIcon,
 } from "@radix-ui/react-icons";
 
 ---
@@ -149,6 +157,25 @@ import {
 							</span>
 						  </CardTitle>
 						  <CardDescription>Transfer a quantity of an asset to another account</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+			<div class="col-span-1">
+				<a href="/trade">
+					<Card>
+						<CardHeader>
+						  <CardTitle>
+							<span class="flex">
+								<span class="flex-shrink">
+									<UpdateIcon className="w-6 h-6 mr-3" />
+								</span>
+								<span class="flex-auto">
+									Trade WRAM & EOS
+								</span>
+							</span>
+						</CardTitle>
+						  <CardDescription>Need to swap some EOS tokens? Look no further!</CardDescription>
 						</CardHeader>
 					</Card>
 				</a>

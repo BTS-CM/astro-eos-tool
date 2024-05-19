@@ -1,0 +1,265 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import {Button} from "@/components/ui/button";
+
+import Header from "@/components/astro/header.astro";
+import Footer from "@/components/astro/footer.astro";
+
+import ExternalLink from "@/components/react/ExternalLink.tsx";
+---
+
+<Layout title="EOS Astro Tool - Where to trade EOS tokens">
+	<main>
+		<Header />
+		<div class="grid grid-cols-1 mt-5">
+			<div class="col-span-1">
+				<Card>
+					<CardHeader>
+						<CardTitle>Where to trade EOS & WRAM</CardTitle>
+						<CardDescription>Check out these external resources!</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<div class="grid grid-cols-1">
+							<h4 class="scroll-m-20 text-xl font-semibold tracking-tight">
+								Consider the Bitshares DEX for your EOS & WRAM trading needs! 
+							</h4>
+							<p class="leading-7 [&:not(:first-child)]:mt-2">
+								XBTS and BTWTY offer the following gateway assets for trade against any other asset on the Bitshares DEX.
+							</p>
+							<div class="grid sm:grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+								<ExternalLink
+									hyperlink="https://ex.xbts.io/market/XBTSX.WRAM_BTS?r=nftprofessional1"
+									type="button"
+									text="XBTS WRAM:BTS"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://ex.xbts.io/market/XBTSX.EOS_BTS?r=nftprofessional1"
+									type="button"
+									text="XBTS EOS:BTS"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://ex.xbts.io/market/BTWTY.EOS_BTS?r=nftprofessional1"
+									type="button"
+									text="BTWTY EOS:BTS"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+							</div>
+							<h4 class="scroll-m-20 text-xl font-semibold tracking-tight mt-4">
+								EOS & WRAM Liquidity Pools
+							</h4>
+							<p class="leading-7 [&:not(:first-child)]:mt-2">
+								Check out these liquidity pools for EOS & WRAM on the Bitshares DEX! Either swap assets or stake them in pools for passive income.  
+							</p>
+							<div class="grid sm:grid-cols-1 md:grid-cols-4 gap-2 mt-3">
+								<ExternalLink
+									hyperlink="https://app.xbts.io/#/pool/XBTSX.EOSWRAMLP"
+									type="button"
+									text="XBTS EOS:WRAM"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://app.xbts.io/#/pool/XBTSX.USDTWRAMLP"
+									type="button"
+									text="XBTS USDT:WRAM"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://app.xbts.io/#/pool/BTWTY.EOSWRAMLP"
+									type="button"
+									text="BTWTY EOS:WRAM"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://app.xbts.io/#/pool/XBTSX.STHWRAMLP"
+									type="button"
+									text="XBTS STH:WRAM"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+							</div>
+
+							<h4 class="scroll-m-20 text-xl font-semibold tracking-tight mt-4">
+								Blockchain explorers
+							</h4>
+							<p class="leading-7 [&:not(:first-child)]:mt-2">
+								Track ongoing transactions, parse block contents, verify assets and accounts, all with the help of these blockchain explorers!	
+							</p>
+							<div class="grid sm:grid-cols-1 md:grid-cols-4 gap-2 mt-3">
+								<ExternalLink
+									hyperlink="https://bts.exchange/#/explorer/blocks?r=nftprofessional1"
+									type="button"
+									text="BTS.exchange"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://ex.xbts.io/explorer/blocks?r=nftprofessional1"
+									type="button"
+									text="XBTS.io"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://blocksights.info/"
+									type="button"
+									text="Blocksights.info"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://eosauthority.com/"
+									type="button"
+									text="EOS Authority"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://bloks.io/"
+									type="button"
+									text="Bloks.io"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://eos.eosq.eosnation.io/"
+									type="button"
+									text="EOS Nation"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://eosflare.io/"
+									type="button"
+									text="EOS Flare"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+							</div>
+
+
+							<h4 class="scroll-m-20 text-xl font-semibold tracking-tight mt-4">
+								CoinGecko
+							</h4>
+							<p class="leading-7 [&:not(:first-child)]:mt-2">
+								CoinGecko provides a fundamental analysis of the crypto market. In addition to tracking price, volume and market capitalisation, CoinGecko tracks community growth, open-source code development, major events and on-chain metrics.
+							</p>
+							<div class="grid sm:grid-cols-1 md:grid-cols-4 gap-2 mt-3">
+								<ExternalLink
+									hyperlink="https://www.coingecko.com/en/coins/eos-wrapped-ram"
+									type="button"
+									text="EOS WRAM"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://www.coingecko.com/en/coins/eos"
+									type="button"
+									text="EOS"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://www.coingecko.com/en/coins/bitshares"
+									type="button"
+									text="Bitshares"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://www.coingecko.com/en/coins/hive"
+									type="button"
+									text="Hive"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+							</div>
+
+							<h4 class="scroll-m-20 text-xl font-semibold tracking-tight mt-4">
+								Coinpaprika
+							</h4>
+							<p class="leading-7 [&:not(:first-child)]:mt-2">
+								Coinpaprika research platform was founded in April 2018. Their mission is to provide the most accurate data in the industry for the widest range of crypto assets traded on centralized and decentralized exchanges.
+							</p>
+							<div class="grid sm:grid-cols-1 md:grid-cols-3 gap-2 mt-3">
+								<ExternalLink
+									hyperlink="https://coinpaprika.com/coin/eos-eos"
+									type="button"
+									text="EOS"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://coinpaprika.com/coin/bts-bitshares"
+									type="button"
+									text="Bitshares"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+								<ExternalLink
+									hyperlink="https://coinpaprika.com/coin/hive-hive"
+									type="button"
+									text="Hive"
+									variant="default"
+									classnamecontents=""
+									client:only="react"
+								/>
+							</div>
+
+						</div>
+					</CardContent>
+				</Card>
+			</div>
+		</div>
+		<Footer />
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1rem;
+		width: 900px;
+		max-width: calc(100% - 2rem);
+		color: white;
+		font-size: 20px;
+		line-height: 1.6;
+		min-height: 100%;
+		height: 100%;
+	}
+</style>
