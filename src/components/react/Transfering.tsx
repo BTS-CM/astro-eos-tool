@@ -19,7 +19,7 @@ export default function Transfer() {
   const [chain, setChain] = useState<string>("EOS");
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
-  const [quantity, setQuantity] = useState<number>(1.0);
+  const [quantity, setQuantity] = useState<string>("0.0001");
   const [asset, setAsset] = useState<string>("EOS");
   const [memo, setMemo] = useState<string>("");
   const [openDeeplink, setOpenDeeplink] = useState<boolean>(false);
@@ -72,11 +72,17 @@ export default function Transfer() {
           placeholder="1.0000"
           value={quantity}
           type="number"
+          min="0.0001"
+          step="0.0001"
           onInput={(e) => {
             let value = parseFloat(e.currentTarget.value);
             if (!isNaN(value)) {
-              setQuantity(parseFloat(value.toFixed(4)));
+              setQuantity(e.currentTarget.value);
             }
+          }}
+          onBlur={(e) => {
+            const value = parseFloat(e.currentTarget.value);
+            setQuantity(value < 0.0001 ? "0.0001" : value.toFixed(4));
           }}
         />
         <HoverInfo

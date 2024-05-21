@@ -27,6 +27,7 @@ import {
   LockClosedIcon,
   HomeIcon,
   ThickArrowDownIcon,
+  UpdateIcon,
 } from "@radix-ui/react-icons";
 
 export default function Menu() {
@@ -78,6 +79,11 @@ export default function Menu() {
                 url="/unwrap"
                 text="Unwrap WRAM"
                 icon={<LockOpen2Icon className="w-4 h-4 mr-3" />}
+              />
+              <MenuRow
+                url="/trade"
+                text="Where to trade"
+                icon={<UpdateIcon className="w-4 h-4 mr-3" />}
               />
               <MenuRow
                 url="/about"

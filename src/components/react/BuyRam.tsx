@@ -19,7 +19,7 @@ export default function BuyRam() {
   const [chain, setChain] = useState<string>("EOS");
   const [payer, setPayer] = useState<string>("");
   const [receiver, setReceiver] = useState<string>("");
-  const [quant, setQuant] = useState<number>(1);
+  const [quant, setQuant] = useState<string>("0.0001");
   const [openDeeplink, setOpenDeeplink] = useState<boolean>(false);
 
   return (
@@ -67,10 +67,18 @@ export default function BuyRam() {
           header={`Quantity of ${chain} to sell for RAM`}
         />
         <Input
-          placeholder="1"
+          placeholder="1.0000"
           value={quant}
           type="number"
-          onInput={(e) => setQuant(parseInt(e.currentTarget.value))}
+          min="0.0001"
+          step="0.0001"
+          onInput={(e) => {
+            setQuant(e.currentTarget.value);
+          }}
+          onBlur={(e) => {
+            const value = parseFloat(e.currentTarget.value);
+            setQuant(value < 0.0001 ? "0.0001" : value.toFixed(4));
+          }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setOpenDeeplink(true);
@@ -95,7 +103,7 @@ export default function BuyRam() {
                 data: {
                   payer: payer,
                   receiver: receiver,
-                  quant: quant,
+                  quant: `${quant} EOS`,
                 },
               },
             ]}

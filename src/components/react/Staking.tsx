@@ -24,8 +24,8 @@ export default function Staking({ type }: TransferProps) {
   const [from, setFrom] = useState<string>("");
   const [receiver, setReceiver] = useState<string>("");
 
-  const [net, setNet] = useState<number>(1.0);
-  const [cpu, setCPU] = useState<number>(3.0);
+  const [net, setNet] = useState<string>("1.0000");
+  const [cpu, setCPU] = useState<string>("3.0000");
 
   const [openDeeplink, setOpenDeeplink] = useState<boolean>(false);
 
@@ -79,11 +79,17 @@ export default function Staking({ type }: TransferProps) {
           placeholder="1.0000"
           value={net}
           type="number"
+          min="0.0001"
+          step="0.0001"
           onInput={(e) => {
             let value = parseFloat(e.currentTarget.value);
             if (!isNaN(value)) {
-              setNet(parseFloat(value.toFixed(4)));
+              setNet(e.currentTarget.value);
             }
+          }}
+          onBlur={(e) => {
+            const value = parseFloat(e.currentTarget.value);
+            setNet(value < 0.0001 ? "0.0001" : value.toFixed(4));
           }}
         />
         <HoverInfo
@@ -96,11 +102,17 @@ export default function Staking({ type }: TransferProps) {
           placeholder="1.0000"
           value={cpu}
           type="number"
+          min="0.0001"
+          step="0.0001"
           onInput={(e) => {
             let value = parseFloat(e.currentTarget.value);
             if (!isNaN(value)) {
-              setCPU(parseFloat(value.toFixed(4)));
+              setCPU(e.currentTarget.value);
             }
+          }}
+          onBlur={(e) => {
+            const value = parseFloat(e.currentTarget.value);
+            setCPU(value < 0.0001 ? "0.0001" : value.toFixed(4));
           }}
         />
         <Button className="mt-3" onClick={() => setOpenDeeplink(true)}>
