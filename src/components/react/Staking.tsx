@@ -122,7 +122,7 @@ export default function Staking({ type }: TransferProps) {
           <DeepLinkDialog
             trxJSON={[
               {
-                account: "eosio.token",
+                account: "eosio",
                 name: type === "stake" ? "delegatebw" : "undelegatebw",
                 authorization: [
                   {
